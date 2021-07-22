@@ -1,0 +1,15 @@
+h1,h2,p,a,pre,td,th {color: black;}
+h1{
+    font-family: fantasy;
+}
+h2{
+    font-family: monospace;
+}
+p{
+    font-family: Comic Sans;
+    font-size: 15px;
+}
+pre{
+    font-family: Comic Sans;
+    font-size: 15px;
+}

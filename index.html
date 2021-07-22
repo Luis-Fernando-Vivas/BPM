@@ -1,0 +1,102 @@
+<html>   
+ <head>
+  <title>Producto de matrices
+</title>
+        <link rel="stylesheet" href="./css/bootstrap.min.css">
+        <link rel="stylesheet" href="Margen.css">
+        <link rel="stylesheet" href="letra.css">
+        <script >
+     var a=new Array(3);b=new Array(3);c=new Array(3)
+     function producto()
+     {
+      for(i=1;i<=3;i++)
+       {   a[i]=[0,0,0];b[i]= [0,0,0];c[i]= [0,0,0]
+            for(j=1;j<=3;j++)
+             {  a[i][j]=parseFloat(document.matriza[3*i+j-4].value)
+                 b[i][j]=parseFloat(document.matrizb[3*i+j-4].value)}}
+      for(i=1;i<=3;i++)
+       {   for(j=1;j<=3;j++)
+              { c[i][j]=0
+                     for(k=1;k<=3;k++)
+                       {c[i][j]=c[i][j]+a[i][k]*b[k][j]}
+                document.matrizc[3*i+j-4].value=c[i][j]}}
+      }
+     function suma()
+     {
+      for(i=1;i<=3;i++)
+       {   a[i]=[0,0,0];b[i]= [0,0,0];c[i]= [0,0,0]
+            for(j=1;j<=3;j++)
+             {  a[i][j]=parseFloat(document.matriza[3*i+j-4].value)
+                 b[i][j]=parseFloat(document.matrizb[3*i+j-4].value)}}
+      for(i=1;i<=3;i++)
+       {   for(j=1;j<=3;j++)
+              { c[i][j]=0
+                    {c[i][j]=a[i][j]+b[i][j]}
+                document.matrizc[3*i+j-4].value=c[i][j]}}
+      }
+     function resta()
+     {
+      for(i=1;i<=3;i++)
+       {   a[i]=[0,0,0];b[i]= [0,0,0];c[i]= [0,0,0]
+            for(j=1;j<=3;j++)
+             {  a[i][j]=parseFloat(document.matriza[3*i+j-4].value)
+                 b[i][j]=parseFloat(document.matrizb[3*i+j-4].value)}}
+      for(i=1;i<=3;i++)
+       {   for(j=1;j<=3;j++)
+              { c[i][j]=0
+                    {c[i][j]=a[i][j]-b[i][j]}
+                document.matrizc[3*i+j-4].value=c[i][j]}}
+      }
+    </script>
+            <style>
+        body {background-color:#c2c2c2;}
+        
+        </style>
+ </head>
+<body>
+<center> 
+    <h1>Operaciones con matrices</h1> <br>
+    <h2>Producto</h2>
+    <img src="./imagenes/multi.png" class="img-thumbnail img-fluid" alt=""> <br> <br>
+    <h2>Suma y Resta</h2>
+    <img src="./imagenes/operacion.png" class="img-thumbnail img-fluid" alt=""> <br> <br>
+<form name="matriza">
+    <p>A=</p> <input type="text" size="3">
+            <input type="text" size="3">
+            <input type="text" size="3"><BR>
+            <input type="text" size="3">
+            <input type="text" size="3">
+            <input type="text" size="3"><BR>
+            <input type="text" size="3">
+            <input type="text" size="3">     
+            <input type="text" size="3">
+</form>
+<form name="matrizb">
+<p>B=</p> <input type="text" size="3">
+            <input type="text" size="3">
+            <input type="text" size="3"><BR>
+            <input type="text" size="3">
+            <input type="text" size="3">
+            <input type="text" size="3"><BR>
+            <input type="text" size="3">
+            <input type="text" size="3">     
+            <input type="text" size="3"> <br><br>
+            <input type="button" value="producto" onClick=" producto()"> 
+            <input type="button" value="suma" onClick=" suma()">
+            <input type="button" value="resta" onClick=" resta()">
+</form>
+<form name="matrizc">
+<p>Matriz resultante C=</p>
+            <input type="text" size="3">
+            <input type="text" size="3">
+            <input type="text" size="3"><BR>
+            <input type="text" size="3">
+            <input type="text" size="3">
+            <input type="text" size="3"><BR>
+            <input type="text" size="3">
+            <input type="text" size="3">     
+            <input type="text" size="3"><BR><BR><BR>
+  </form>
+</center>
+ </body>
+</html>
