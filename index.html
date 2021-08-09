@@ -1,102 +1,107 @@
-<html>   
- <head>
-  <title>Producto de matrices
-</title>
-        <link rel="stylesheet" href="./css/bootstrap.min.css">
-        <link rel="stylesheet" href="Margen.css">
-        <link rel="stylesheet" href="letra.css">
-        <script >
-     var a=new Array(3);b=new Array(3);c=new Array(3)
-     function producto()
-     {
-      for(i=1;i<=3;i++)
-       {   a[i]=[0,0,0];b[i]= [0,0,0];c[i]= [0,0,0]
-            for(j=1;j<=3;j++)
-             {  a[i][j]=parseFloat(document.matriza[3*i+j-4].value)
-                 b[i][j]=parseFloat(document.matrizb[3*i+j-4].value)}}
-      for(i=1;i<=3;i++)
-       {   for(j=1;j<=3;j++)
-              { c[i][j]=0
-                     for(k=1;k<=3;k++)
-                       {c[i][j]=c[i][j]+a[i][k]*b[k][j]}
-                document.matrizc[3*i+j-4].value=c[i][j]}}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardiograma</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="Margen.css">
+    <link rel="stylesheet" href="letra.css">
+    <link rel="stylesheet" href="sombra.css">
+    <style>
+    body {background-color:#A0D9D9;}
+    </style>
+  </head>
+  <body>
+  <center>
+    <div class="sombra"><h1>Monitoreo de la frecuencia cardíaca con sensor de frecuencia cardíaca de pulso y NodeMCU ESP12E ESP8266</h1>
+    <img src="./Imagenes/cora.jpg" width="300" height="150"/>
+    <br>
+    <canvas id="myCanvas" width="500" height="200"></canvas>
+    <div id="postElement1" class='postElement1'></div>
+    <p>Min = 0 &nbsp;&nbsp;&nbsp; Max = 220</p>
+    <p>Espere 10 segundos para obtener el valor de BPM</p>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-analytics.js"></script>
+
+<script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyAaw0uWq4zZRhOc6Rw_ZGD0cyULGLhg2AY",
+    authDomain: "pulso-cardiaco-33339.firebaseapp.com",
+    databaseURL: "https://pulso-cardiaco-33339-default-rtdb.firebaseio.com",
+    projectId: "pulso-cardiaco-33339",
+    storageBucket: "pulso-cardiaco-33339.appspot.com",
+    messagingSenderId: "249453564298",
+    appId: "1:249453564298:web:8081c9616703e674e1f873",
+    measurementId: "G-R61R7WVCFF"
+  };
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+
+    <script>
+        var postElement1 = document.getElementById("postElement1");
+        var paro= postElement1.innerHTML;
+        var updateStarCount = function(element, value) {
+        element.textContent = value;
+        };
+        var starCountRef = firebase.database().ref('/BPM');
+        starCountRef.on('value', function(snapshot) {
+        var iniciando=snapshot.val();
+        updateStarCount(postElement1, iniciando);
+        });
+      
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+      var start=1.58;
+      var cw=context.canvas.width/2;
+      var ch=context.canvas.height/2;
+      var diff;
+       
+      var cnt = 0;
+      var bar=setInterval(progressBar,10);
+      function progressBar(){
+        var BPMval = Number(postElement1.innerHTML); //Variable para obtener el valor BPM de firebase. 
+        var HR = map(BPMval,0,220,0,100);
+        diff=(cnt/100)*Math.PI*2;
+        context.clearRect(0,0,400,200);
+        context.beginPath();
+        context.arc(cw,ch,70,0,2*Math.PI,false);
+        context.fillStyle='#FFF';
+        context.fill();
+        context.strokeStyle='#e7f2ba';
+        context.stroke();
+        context.fillStyle='#000';
+        context.strokeStyle='#b3cf3c';
+        context.textAlign='center';
+        context.lineWidth=15;
+        context.font = '15pt Verdana';
+        context.beginPath();
+        context.arc(cw,ch,70,start,diff+start,false);
+        context.stroke();
+        context.fillText(BPMval+' BPM',cw+2,ch+6);
+        
+        if(cnt<HR) {
+          cnt++;
+        }
+                
+        if(cnt>HR) {
+          cnt--;
+        }
       }
-     function suma()
-     {
-      for(i=1;i<=3;i++)
-       {   a[i]=[0,0,0];b[i]= [0,0,0];c[i]= [0,0,0]
-            for(j=1;j<=3;j++)
-             {  a[i][j]=parseFloat(document.matriza[3*i+j-4].value)
-                 b[i][j]=parseFloat(document.matrizb[3*i+j-4].value)}}
-      for(i=1;i<=3;i++)
-       {   for(j=1;j<=3;j++)
-              { c[i][j]=0
-                    {c[i][j]=a[i][j]+b[i][j]}
-                document.matrizc[3*i+j-4].value=c[i][j]}}
-      }
-     function resta()
-     {
-      for(i=1;i<=3;i++)
-       {   a[i]=[0,0,0];b[i]= [0,0,0];c[i]= [0,0,0]
-            for(j=1;j<=3;j++)
-             {  a[i][j]=parseFloat(document.matriza[3*i+j-4].value)
-                 b[i][j]=parseFloat(document.matrizb[3*i+j-4].value)}}
-      for(i=1;i<=3;i++)
-       {   for(j=1;j<=3;j++)
-              { c[i][j]=0
-                    {c[i][j]=a[i][j]-b[i][j]}
-                document.matrizc[3*i+j-4].value=c[i][j]}}
+      //Escale desde el valor de BPM hasta el valor de la barra de progreso.
+      // El valor de BPM es min = 0 y max = 220 se escala al valor de la barra de progreso min = 0 y max = 100.
+      // Fuente: https://www.arduino.cc/reference/en/language/functions/math/map/ , https://forum.jquery.com/topic/jquery-map-like-arduino-map
+      function map( x,  in_min,  in_max,  out_min,  out_max){
+        return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
       }
     </script>
-            <style>
-        body {background-color:#c2c2c2;}
-        
-        </style>
- </head>
-<body>
-<center> 
-    <h1>Operaciones con matrices</h1> <br>
-    <h2>Producto</h2>
-    <img src="https://economipedia.com/wp-content/uploads/Multiplicacion-de-matrices.png" class="img-thumbnail img-fluid" alt=""> <br> <br>
-    <h2>Suma y Resta</h2>
-    <img src="https://economipedia.com/wp-content/uploads/Suma-y-resta-de-matrices.png" class="img-thumbnail img-fluid" alt=""> <br> <br>
-<form name="matriza">
-    <p>A=</p> <input type="text" size="3">
-            <input type="text" size="3">
-            <input type="text" size="3"><BR>
-            <input type="text" size="3">
-            <input type="text" size="3">
-            <input type="text" size="3"><BR>
-            <input type="text" size="3">
-            <input type="text" size="3">     
-            <input type="text" size="3">
-</form>
-<form name="matrizb">
-<p>B=</p> <input type="text" size="3">
-            <input type="text" size="3">
-            <input type="text" size="3"><BR>
-            <input type="text" size="3">
-            <input type="text" size="3">
-            <input type="text" size="3"><BR>
-            <input type="text" size="3">
-            <input type="text" size="3">     
-            <input type="text" size="3"> <br><br>
-            <input type="button" value="producto" onClick=" producto()"> 
-            <input type="button" value="suma" onClick=" suma()">
-            <input type="button" value="resta" onClick=" resta()">
-</form>
-<form name="matrizc">
-<p>Matriz resultante C=</p>
-            <input type="text" size="3">
-            <input type="text" size="3">
-            <input type="text" size="3"><BR>
-            <input type="text" size="3">
-            <input type="text" size="3">
-            <input type="text" size="3"><BR>
-            <input type="text" size="3">
-            <input type="text" size="3">     
-            <input type="text" size="3"><BR><BR><BR>
-  </form>
-</center>
- </body>
+    </div>
+    </center>
+  </body>
 </html>
+

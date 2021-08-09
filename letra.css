@@ -1,12 +1,12 @@
-h1,h2,p,a,pre,td,th {color: black;}
+h1,h2,p,a,pre,td,th {color: #A62D2D;;}
 h1{
-    font-family: fantasy;
+    font-family: inherit;
 }
 h2{
     font-family: monospace;
 }
 p{
-    font-family: Comic Sans;
+    font-family: fantasy;
     font-size: 15px;
 }
 pre{
