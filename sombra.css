@@ -1,5 +1,6 @@
 .sombra {
 box-shadow: 5px 5px 5px 5px #999;
+width: 100%;
 }
 h1 {
 text-shadow: 0.1em 0.1em 0.3em black}
