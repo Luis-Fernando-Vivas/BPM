@@ -1,15 +1,17 @@
 h1,h2,p,a,pre,td,th {color: #A62D2D;;}
 h1{
     font-family: inherit;
+    font-size: 200%;
 }
 h2{
     font-family: monospace;
+    font-size: 130%;
 }
 p{
     font-family: fantasy;
-    font-size: 15px;
+    font-size: 100%;
 }
 pre{
     font-family: Comic Sans;
-    font-size: 15px;
+    font-size: 100%;
 }
